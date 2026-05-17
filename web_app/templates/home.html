@@ -2,10 +2,120 @@
 
 {% block content %}
 
-<h1>Smart basketball Hoop Tracker</h1>
+<section class="hero">
 
-<p>
-    Track your basketball training statistics automatically.
-</p>
+    <div class="hero-content">
+
+        <h1>Smart Basketball Hoop Tracker</h1>
+
+        <p>
+            Train smarter with automatic basketball shot tracking,
+            real-time statistics, and performance analytics powered
+            by Raspberry Pi and Django.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#" class="btn btn-primary">Start Training</a>
+            <a href="#" class="btn btn-secondary">View Statistics</a>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="features">
+
+    <h2>Features</h2>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <h3>🏀 Automatic Shot Tracking</h3>
+
+            <p>
+                View shooting percentage, made shots,
+                attempts and training analytics instantly.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>📈 Performance Analytics</h3>
+
+            <p>
+                Analyze your progress over time with
+                interactive charts and detailed statistics.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="how-it-works">
+
+    <h2>How It Works</h2>
+
+    <div class="steps">
+
+        <div class="step">
+            <h3>Shoot the Ball</h3>
+
+            <p>
+                The player takes a basketball shot during training.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>Sensor Detects the Shot</h3>
+
+            <p>
+                Infrared sensors mounted on the hoop detect the ball.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>Data is Sent to the Server</h3>
+
+            <p>
+                Raspberry Pi processes the data and sends it to Django Server.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>Statistics Are Generated</h3>
+
+            <p>
+                The website updates your statistics and performance charts.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="stats-preview">
+
+    <h2>Training Statistics</h2>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h3>1250+</h3>
+            <p>Total Shots Tracked</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>82%</h3>
+            <p>Best Shooting Percentage</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>300+</h3>
+            <p>Training Sessions</p>
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}

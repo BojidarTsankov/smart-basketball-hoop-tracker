@@ -5,13 +5,11 @@ body {
     color: white;
 }
 
-h1 {
-    color: orange;
-}
+/* navbar */
 
 .navbar {
     background-color: #1a1a1a;
-    padding: 15px 40px;
+    padding: 35px 40px;
 
     display: flex;
     justify-content: space-between;
@@ -23,7 +21,7 @@ h1 {
 .logo a {
     color: orange;
     text-decoration: none;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
 }
 
@@ -46,4 +44,192 @@ h1 {
 
 .nav-links a:hover {
     color: orange;
+}
+
+/* main */
+
+main {
+    min-height: 80vh;
+}
+
+.hero {
+    min-height: 85vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 40px;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero h1 {
+    font-size: 64px;
+
+    color: orange;
+
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 20px;
+    line-height: 1.7;
+
+    color: #ccc;
+
+    margin-bottom: 40px;
+}
+
+/* buttons */
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 28px;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background-color: orange;
+    color: black;
+}
+
+.btn-primary:hover {
+    background-color: #ffb347;
+}
+
+.btn-secondary {
+    border: 2px solid orange;
+    color: orange;
+}
+
+.btn-secondary:hover {
+    background-color: orange;
+    color: black;
+}
+
+/* sections */
+
+.features,
+.how-it-works,
+.stats-preview {
+    padding: 80px 40px;
+
+    text-align: center;
+}
+
+.features h2,
+.how-it-works h2,
+.stats-preview h2 {
+    font-size: 42px;
+    color: orange;
+
+    margin-bottom: 50px;
+}
+
+.feature-grid,
+.stats-grid,
+.steps {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+    gap: 30px;
+
+    max-width: 1200px;
+    margin: auto;
+}
+
+.feature-card,
+.stat-card,
+.step {
+    background-color: #1a1a1a;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    border: 1px solid #333;
+
+    transition: 0.3s;
+}
+
+.feature-card:hover,
+.stat-card:hover,
+.step:hover {
+    transform: translateY(-5px);
+
+    border-color: orange;
+
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.3);
+}
+
+.feature-card h3,
+.stat-card h3,
+.step h3 {
+    color: orange;
+
+    margin-bottom: 15px;
+}
+
+.feature-card p,
+.stat-card p,
+.step p {
+    color: #ccc;
+
+    line-height: 1.6;
+}
+
+.stat-card h3 {
+    font-size: 42px;
+}
+
+/* footer */
+
+.footer {
+    background-color: #1a1a1a;
+
+    border-top: 2px solid orange;
+
+    padding: 30px 20px;
+
+    text-align: center;
+}
+
+.footer-content h3 {
+    color: orange;
+
+    margin-bottom: 10px;
+}
+
+.footer-content p {
+    color: #ccc;
+
+    margin: 5px 0;
+}
+
+.footer-copy {
+    margin-top: 15px;
+
+    font-size: 14px;
+
+    color: #777;
 }
