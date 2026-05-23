@@ -369,3 +369,74 @@ main {
     padding: 0;
     margin: 5px 0 10px;
 }
+
+
+/* dashboard */
+
+.dashboard {
+    padding: 80px 40px;
+}
+
+.dashboard h1 {
+    font-size: 48px;
+
+    color: orange;
+
+    margin-bottom: 50px;
+
+    text-align: center;
+}
+
+/* recent trainings */
+
+.recent-trainings {
+    max-width: 1200px;
+
+    margin: 70px auto 0;
+}
+
+.recent-trainings h2 {
+    color: orange;
+
+    margin-bottom: 25px;
+
+    font-size: 32px;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background-color: #1a1a1a;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    border: 1px solid #333;
+}
+
+th {
+    background-color: #222;
+
+    color: orange;
+
+    padding: 18px;
+
+    font-size: 16px;
+}
+
+td {
+    padding: 18px;
+
+    text-align: center;
+
+    border-top: 1px solid #333;
+
+    color: #ddd;
+}
+
+tr:hover {
+    background-color: #222;
+}
