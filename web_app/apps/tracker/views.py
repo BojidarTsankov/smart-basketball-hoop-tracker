@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
@@ -45,3 +45,18 @@ def dashboard(request):
     }
 
     return render(request, 'dashboard.html', context)
+
+
+@login_required
+def start_training(request):
+    session = TrainingSession.objects.create(user=request.user)
+    return redirect('live_session', session_id=session.id)
+
+
+@login_required
+def live_session(request, session_id):
+    session = TrainingSession.objects.get(id=session_id, user=request.user)
+
+    return render(request, 'live_session.html', {
+        'session': session
+    })
