@@ -15,7 +15,7 @@
         </p>
 
         <div class="hero-buttons">
-            <a href="#" class="btn btn-primary">Start Training</a>
+            <a href="{% url 'start_training' %}" class="btn btn-primary">Start Training</a>
             <a href="#" class="btn btn-secondary">View Statistics</a>
         </div>
 
@@ -100,17 +100,17 @@
     <div class="stats-grid">
 
         <div class="stat-card">
-            <h3>1250+</h3>
+            <h3>{{ total_shots }}</h3>
             <p>Total Shots Tracked</p>
         </div>
 
         <div class="stat-card">
-            <h3>82%</h3>
+            <h3>{{ best_percentage }}</h3>
             <p>Best Shooting Percentage</p>
         </div>
 
         <div class="stat-card">
-            <h3>300+</h3>
+            <h3>{{ total_sessions }}</h3>
             <p>Training Sessions</p>
         </div>
 

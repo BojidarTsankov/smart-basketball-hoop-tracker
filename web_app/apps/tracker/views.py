@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum, Avg
 
 from .models import TrainingSession
 
@@ -8,7 +9,26 @@ from .models import TrainingSession
 
 
 def home(request):
-    return render(request, 'home.html')
+    sessions = TrainingSession.objects.all()
+
+    total_shots = sessions.aggregate(total=Sum('total_shots'))['total'] or 0
+    total_sessions = sessions.count()
+
+    best_percentage = 0
+
+    for s in sessions:
+        if s.total_shots > 0:
+            percent = (s.made_shots / s.total_shots) * 100
+            if percent > best_percentage:
+                best_percentage = percent
+
+    context = {
+        'total_shots': total_shots,
+        'total_sessions': total_sessions,
+        'best_percentage': round(best_percentage, 2)
+    }
+
+    return render(request, 'home.html', context)
 
 
 @login_required
