@@ -69,6 +69,15 @@ def dashboard(request):
 
 
 @login_required
+def training_history(request):
+    trainings = TrainingSession.objects.filter(
+        user=request.user
+    ).order_by('-start_time')
+
+    return render(request, 'history.html', {'trainings': trainings})
+
+
+@login_required
 def start_training(request):
     session = TrainingSession.objects.create(user=request.user)
     return redirect('live_session', session_id=session.id)

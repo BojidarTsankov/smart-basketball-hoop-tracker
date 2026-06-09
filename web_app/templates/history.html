@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <div class="training-header">
+
+        <h1>Training History</h1>
+
+        <p>View all your previous training sessions</p>
+
+    </div>
+
+    <div class="recent-trainings">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Duration</th>
+                    <th>Shots</th>
+                    <th>Made</th>
+                    <th>Accuracy</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for training in trainings %}
+
+                <tr>
+                    <td>{{ training.start_time|date:"d M Y" }}</td>
+                    <td>{{ training.duration }}</td>
+                    <td>{{ training.total_shots }}</td>
+                    <td>{{ training.made_shots }}</td>
+                    <td>
+                        {% if training.total_shots %}
+                        {% widthratio training.made_shots training.total_shots 100 %}%
+                        {% else %}
+                        0%
+                        {% endif %}
+                    </td>
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="5">You haven't completed any trainings yet</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

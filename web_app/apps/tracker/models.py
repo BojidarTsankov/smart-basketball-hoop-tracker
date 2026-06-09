@@ -22,6 +22,17 @@ class TrainingSession(models.Model):
 
         return round((self.made_shots / self.total_shots) * 100, 2)
 
+    @property
+    def duration(self):
+        if self.end_time:
+            delta = self.end_time - self.start_time
+            total_seconds = int(delta.total_seconds())
+            hours = total_seconds // 3600
+            minutes = (total_seconds % 3600) // 60
+            seconds = total_seconds % 60
+            return f"{hours:02}:{minutes:02}:{seconds:02}"
+        return "In progress"
+
     def __str__(self):
         return f"{self.user.username} - {self.start_time}"
 
