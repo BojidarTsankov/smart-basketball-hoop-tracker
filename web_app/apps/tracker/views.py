@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Avg
+from django.utils import timezone
 
 from .models import TrainingSession
 
@@ -80,3 +81,12 @@ def live_session(request, session_id):
     return render(request, 'live_session.html', {
         'session': session
     })
+
+
+@login_required
+def end_session(request, session_id):
+    session = TrainingSession.objects.get(id=session_id, user=request.user)
+    session.end_time = timezone.now()
+    session.save()
+
+    return redirect('dashboard')

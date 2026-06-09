@@ -8,6 +8,10 @@
         Welcome, {{ request.user.username }}
     </h1>
 
+    <div style="text-align: center; margin-bottom: 60px;">
+        <a href="{% url 'start_training' %}" class="btn btn-primary">Start Training</a>
+    </div>
+
     <div class="stats-grid">
 
         <div class="stat-card">
