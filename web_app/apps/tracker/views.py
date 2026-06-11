@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.db.models import Sum, Avg
+from django.db.models import Sum, Avg, Max
 from django.utils import timezone
 
 from .models import TrainingSession
@@ -41,13 +41,13 @@ def dashboard(request):
 
     total_trainings = trainings.count()
 
-    total_shots = sum(
-        training.total_shots for training in trainings
+    aggregates = trainings.aggregate(
+        total=Sum('total_shots'),
+        made=Sum('made_shots')
     )
 
-    made_shots = sum(
-        training.made_shots for training in trainings
-    )
+    total_shots = aggregates['total'] or 0
+    made_shots = aggregates['made'] or 0
 
     shooting_percentage = 0
 
@@ -79,13 +79,23 @@ def training_history(request):
 
 @login_required
 def start_training(request):
-    session = TrainingSession.objects.create(user=request.user)
+    active_session = TrainingSession.objects.filter(
+        user=request.user,
+        end_time__isnull=True
+    ).first()
+
+    if active_session:
+        session = active_session
+    else:
+        session = TrainingSession.objects.create(user=request.user)
+
     return redirect('live_session', session_id=session.id)
 
 
 @login_required
 def live_session(request, session_id):
-    session = TrainingSession.objects.get(id=session_id, user=request.user)
+    session = get_object_or_404(
+        TrainingSession, id=session_id, user=request.user)
 
     return render(request, 'live_session.html', {
         'session': session
@@ -94,8 +104,64 @@ def live_session(request, session_id):
 
 @login_required
 def end_session(request, session_id):
-    session = TrainingSession.objects.get(id=session_id, user=request.user)
+    session = get_object_or_404(
+        TrainingSession, id=session_id, user=request.user)
     session.end_time = timezone.now()
     session.save()
 
     return redirect('dashboard')
+
+
+@login_required
+def stats(request):
+    trainings = TrainingSession.objects.filter(
+        user=request.user
+    )
+
+    total_trainings = trainings.count()
+
+    total_shots = sum(
+        t.total_shots for t in trainings
+    )
+
+    made_shots = sum(
+        t.made_shots for t in trainings
+    )
+
+    shooting_percentage = (
+        round(made_shots / total_shots * 100, 1)
+        if total_shots else 0
+    )
+
+    best_accuracy = 0
+
+    for t in trainings:
+        if t.total_shots:
+            acc = round(
+                t.made_shots / t.total_shots * 100,
+                2
+            )
+            best_accuracy = max(
+                best_accuracy,
+                acc
+            )
+
+    most_shots = trainings.aggregate(
+        Max("total_shots")
+    )["total_shots__max"] or 0
+
+    average_shots = trainings.aggregate(
+        Avg("total_shots")
+    )["total_shots__avg"] or 0
+
+    context = {
+        "total_trainings": total_trainings,
+        "total_shots": total_shots,
+        "made_shots": made_shots,
+        "shooting_percentage": shooting_percentage,
+        "best_accuracy": best_accuracy,
+        "most_shots": most_shots,
+        "average_shots": round(average_shots, 1),
+    }
+
+    return render(request, 'stats.html', context)

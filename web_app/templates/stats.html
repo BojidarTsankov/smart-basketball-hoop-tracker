@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="stats-page">
+
+    <div class="stats-header">
+
+        <h1>Statistics</h1>
+
+        <p>Track your overall performance</p>
+
+    </div>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h3>{{ total_trainings }}</h3>
+            <p>Total Trainings</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>{{ total_shots }}</h3>
+            <p>Total Shots</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>{{ made_shots }}</h3>
+            <p>Made Shots</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>{{ shooting_percentage }}%</h3>
+            <p>Accuracy</p>
+        </div>
+
+    </div>
+
+    <div class="accuracy-section">
+
+        <h2>Overall Accuracy</h2>
+
+        <div class="progress-bar">
+
+            <div class="progress-fill" style="width: {{ shooting_percentage }}%;"></div>
+
+        </div>
+
+        <p>{{ shooting_percentage }}%</p>
+
+    </div>
+
+    <div class="records">
+
+        <h2>Personal Records</h2>
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <h3>{{ best_accuracy }}%</h3>
+                <p>Best Accuracy</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>{{ most_shots }}</h3>
+                <p>Most Shots</p>
+            </div>
+
+            <div class="stat-card">
+                <h3 style="text-align: center;">{{ average_shots }}</h3>
+                <p>Average Shots</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
