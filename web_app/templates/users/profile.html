@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="profile-page">
+
+    <div class="profile-card">
+
+        <div class="profile-avatar">👤</div>
+
+        <h1>{{ user.username }}</h1>
+        <p class="profile-joined">Member since {{ user.date_joined|date:"F Y" }}</p>
+
+        <div class="profile-fields">
+
+            <div class="profile-field">
+                <span class="field-label">Email</span>
+                <span class="field-value">{{ user.email|default:"Not set" }}</span>
+            </div>
+
+            <div class="profile-field">
+                <span class="field-label">Position</span>
+                <span class="field-value">{{ profile.favorite_position|default:"Not set" }}</span>
+            </div>
+
+            <div class="profile-field">
+                <span class="field-label">Height</span>
+                <span class="field-value">
+                    {% if profile.height %}
+                    {{ profile.height }} cm
+                    {% else %}
+                    Not set
+                    {% endif %}
+                </span>
+            </div>
+
+        </div>
+
+        <a href="{% url 'logout' %}" class="btn btn-secondary">Log Out</a>
+
+    </div>
+
+</section>
+
+{% endblock %}

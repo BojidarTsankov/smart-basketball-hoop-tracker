@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from .forms import CustomRegistrationForm
+from .models import PlayerProfile
 
 # Create your views here.
 
@@ -46,3 +48,12 @@ def logout_view(request):
     logout(request)
 
     return redirect('home')
+
+
+@login_required
+def profile_view(request):
+    profile, created = PlayerProfile.objects.get_or_create(user=request.user)
+
+    return render(request, 'users/profile.html', {
+        'profile': profile
+    })

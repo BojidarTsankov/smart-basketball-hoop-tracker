@@ -3,4 +3,7 @@ from .models import PlayerProfile
 
 # Register your models here.
 
-admin.site.register(PlayerProfile)
+
+@admin.register(PlayerProfile)
+class PlayerProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'favorite_position', 'height']
