@@ -79,6 +79,26 @@
 
     setInterval(updateTimer, 1000);
     updateTimer();
+
+    function fetchLiveStats() {
+        fetch(`/api/session/{{ session.id }}/stats/`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('total').textContent = data.total_shots;
+                document.getElementById('made').textContent = data.made_shots;
+                document.getElementById('missed').textContent = data.missed_shots;
+                document.getElementById('accuracy').textContent = data.shooting_percentage + '%';
+
+                const progressBar = document.querySelector('.progress-fill');
+                if (progressBar) {
+                    progressBar.style.width = data.shooting_percentage + '%';
+                }
+            })
+            .catch(error => console.error("Error:", error));
+    }
+
+    fetchLiveStats();
+    setInterval(fetchLiveStats, 1500);
 </script>
 
 {% endblock %}

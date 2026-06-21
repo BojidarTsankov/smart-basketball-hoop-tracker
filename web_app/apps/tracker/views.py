@@ -202,3 +202,14 @@ def record_shot(request):
             return JsonResponse({"error": "No training started"}, status=404)
 
     return JsonResponse({"error": "Only POST requests allowed"}, status=405)
+
+
+def session_stats_api(request, session_id):
+    session = get_object_or_404(TrainingSession, id=session_id)
+
+    return JsonResponse({
+        'total_shots': session.total_shots,
+        'made_shots': session.made_shots,
+        'missed_shots': session.total_shots - session.made_shots,
+        'shooting_percentage': session.shooting_percentage
+    })

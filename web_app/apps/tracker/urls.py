@@ -11,4 +11,6 @@ urlpatterns = [
     path('history/', views.training_history, name='training_history'),
     path('stats/', views.stats, name='stats'),
     path('api/record_shot/', views.record_shot, name='record_shot'),
+    path('api/session/<int:session_id>/stats/',
+         views.session_stats_api, name='api_session_stats'),
 ]
