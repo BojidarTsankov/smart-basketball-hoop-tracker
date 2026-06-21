@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Avg, Max
 from django.utils import timezone
+import json
+from django.views.decorators.csrf import csrf_exempt
 
-from .models import TrainingSession
+from .models import TrainingSession, Shot
 
 # Create your views here.
 
@@ -165,3 +167,38 @@ def stats(request):
     }
 
     return render(request, 'stats.html', context)
+
+
+@csrf_exempt
+def record_shot(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            made = data.get("made", True)
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON data"}, status=400)
+
+        active_session = TrainingSession.objects.filter(
+            end_time__isnull=True
+        ).last()
+
+        if active_session:
+            Shot.objects.create(
+                training_session=active_session,
+                made=made
+            )
+
+            active_session.total_shots += 1
+            if made:
+                active_session.made_shots += 1
+            active_session.save()
+
+            return JsonResponse({
+                "status": "success",
+                "total_shots": active_session.total_shots,
+                "made_shots": active_session.made_shots
+            })
+        else:
+            return JsonResponse({"error": "No training started"}, status=404)
+
+    return JsonResponse({"error": "Only POST requests allowed"}, status=405)

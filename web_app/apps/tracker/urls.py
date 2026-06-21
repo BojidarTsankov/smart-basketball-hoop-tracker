@@ -10,4 +10,5 @@ urlpatterns = [
          views.end_session, name='end_session'),
     path('history/', views.training_history, name='training_history'),
     path('stats/', views.stats, name='stats'),
+    path('api/record_shot/', views.record_shot, name='record_shot'),
 ]
