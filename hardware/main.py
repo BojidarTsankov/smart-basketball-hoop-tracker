@@ -69,7 +69,7 @@ def miss_listener():
                         send_shot(False)
 
         except OSError:
-            print("⚠️ Remote disconnected. Searching again...")
+            print("Remote disconnected. Searching again...")
             remote = None
             sleep(2)
 
