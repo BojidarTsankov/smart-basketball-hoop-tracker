@@ -156,6 +156,10 @@ def stats(request):
         Avg("total_shots")
     )["total_shots__avg"] or 0
 
+    best_all_time_streak = trainings.aggregate(
+        Max("best_streak")
+    )["best_streak__max"] or 0
+
     context = {
         "total_trainings": total_trainings,
         "total_shots": total_shots,
@@ -164,6 +168,7 @@ def stats(request):
         "best_accuracy": best_accuracy,
         "most_shots": most_shots,
         "average_shots": round(average_shots, 1),
+        "best_all_time_streak": best_all_time_streak,
     }
 
     return render(request, 'stats.html', context)
@@ -191,6 +196,11 @@ def record_shot(request):
             active_session.total_shots += 1
             if made:
                 active_session.made_shots += 1
+                active_session.current_streak += 1
+                if active_session.current_streak > active_session.best_streak:
+                    active_session.best_streak = active_session.current_streak
+            else:
+                active_session.current_streak = 0
             active_session.save()
 
             return JsonResponse({
@@ -211,5 +221,7 @@ def session_stats_api(request, session_id):
         'total_shots': session.total_shots,
         'made_shots': session.made_shots,
         'missed_shots': session.total_shots - session.made_shots,
-        'shooting_percentage': session.shooting_percentage
+        'shooting_percentage': session.shooting_percentage,
+        'current_streak': session.current_streak,
+        'best_streak': session.best_streak
     })

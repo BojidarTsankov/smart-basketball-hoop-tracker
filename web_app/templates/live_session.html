@@ -38,6 +38,16 @@
             <span id="missed">0</span>
         </div>
 
+        <div class="training-card">
+            <h3>Current Streak</h3>
+            <span id="current_streak">0</span>
+        </div>
+
+        <div class="training-card">
+            <h3>Best Streak</h3>
+            <span id="best_streak">0</span>
+        </div>
+
     </div>
 
     <div class="progress-container">
@@ -88,6 +98,8 @@
                 document.getElementById('made').textContent = data.made_shots;
                 document.getElementById('missed').textContent = data.missed_shots;
                 document.getElementById('accuracy').textContent = data.shooting_percentage + '%';
+                document.getElementById('current_streak').textContent = data.current_streak;
+                document.getElementById('best_streak').textContent = data.best_streak;
 
                 const progressBar = document.querySelector('.progress-fill');
                 if (progressBar) {

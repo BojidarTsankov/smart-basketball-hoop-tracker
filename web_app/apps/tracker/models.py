@@ -15,6 +15,10 @@ class TrainingSession(models.Model):
 
     made_shots = models.IntegerField(default=0)
 
+    current_streak = models.IntegerField(default=0)
+
+    best_streak = models.IntegerField(default=0)
+
     @property
     def shooting_percentage(self):
         if self.total_shots == 0:
