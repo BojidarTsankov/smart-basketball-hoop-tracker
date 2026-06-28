@@ -103,14 +103,15 @@ main {
 
 .btn {
     padding: 14px 28px;
-
     text-decoration: none;
-
     border-radius: 8px;
-
     font-weight: bold;
-
     transition: 0.3s;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    text-align: center;
 }
 
 .btn-primary {
@@ -413,6 +414,22 @@ main {
 
     color: orange;
     font-size: 32px;
+}
+
+.auth-card h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+
+.auth-card h3 {
+    color: #fff;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
 }
 
 .auth-card form {
@@ -774,4 +791,64 @@ tr:hover {
     word-break: break-all;
     text-align: right;
     max-width: 60%;
+}
+
+.btn-danger {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: #c9302c;
+    color: white;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.profile-actions .btn,
+.profile-actions form,
+.profile-actions form .btn {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
+
+.profile-card>.btn-secondary {
+    display: block;
+    margin-top: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.messages {
+    max-width: 1200px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+}
+
+.alert {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.alert.success {
+    background-color: #28a745;
+    color: white;
+}
+
+.alert.error {
+    background-color: #dc3545;
+    color: white;
 }

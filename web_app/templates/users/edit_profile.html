@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="auth-section">
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2>Edit Profile</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <h3>Account Settings</h3>
+            <div class="form-group">
+                {{ user_form.username.label_tag }}
+                {{ user_form.username }}
+            </div>
+
+            <div class="form-group">
+                {{ user_form.email.label_tag }}
+                {{ user_form.email }}
+            </div>
+
+            <h3>Player Details</h3>
+            <div class="form-group">
+                {{ profile_form.height.label_tag }}
+                {{ profile_form.height }}
+            </div>
+
+            <div class="form-group">
+                {{ profile_form.favorite_position.label_tag }}
+                {{ profile_form.favorite_position }}
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
+                Save Changes
+            </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 15px;">
+            <a href="{% url 'profile' %}" class="auth-btn" style="background-color: #333; color: #ccc; text-decoration: none; padding: 10px 20px; display: inline-block;">Cancel</a>
+        </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -37,3 +37,20 @@ class CustomRegistrationForm(UserCreationForm):
             )
 
         return user
+
+
+class UserEditForm(forms.ModelForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+
+class PlayerProfileForm(forms.ModelForm):
+    favorite_position = forms.ChoiceField(
+        choices=POSITION_CHOICES, required=False)
+
+    class Meta:
+        model = PlayerProfile
+        fields = ['height', 'favorite_position']
